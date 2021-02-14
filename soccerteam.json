@@ -1,0 +1,30 @@
+{
+    
+        "teams": [
+            {
+                "team_id": 1,
+                "name": "Real Madrid"
+            },
+            {
+                "team_id": 2,
+                "name": "Arsenal"
+            },
+            {
+                "team_id": 3,
+                "name": "Everton"
+            },
+            {
+                "team_id": 4,
+                "name": "Liverpool"
+            },
+            {
+                "team_id": 5,
+                "name": "Manchester United"
+            },
+            {
+                "team_id": 6,
+                "name": "Chelsea"
+            }
+        ]
+    
+}
