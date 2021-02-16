@@ -14,17 +14,17 @@ import javax.inject.Inject
 
 class MainViewModel @Inject constructor(private val fixtureRepository: FixtureRepository):ViewModel(){
     var teamList: MutableLiveData<Resource<List<Team>>> = MutableLiveData()
-    var tempList = MutableLiveData<List<Team>>()
+
 
     fun getTeamList(context: Context)=viewModelScope.launch {
        val response=fixtureRepository.getTeamsList()
-       //teamList.postValue(handleTeamListResponse(response))
+       teamList.postValue(handleTeamListResponse(response))
 
     }
     private fun handleTeamListResponse(response: Response<List<Team>>): Resource<List<Team>> {
         if (response.isSuccessful && response.body()?.isNotEmpty()!!) {
             response.body()?.let {
-                tempList.value=it
+
                 return Resource.Success(it)
 
             }

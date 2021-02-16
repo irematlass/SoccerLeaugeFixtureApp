@@ -1,8 +1,11 @@
 package com.app.soccerleaugefixtureapp.ui.view
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.AttributeSet
 import android.util.Log
+import android.view.View
 import com.app.soccerleaugefixtureapp.R
 import com.app.soccerleaugefixtureapp.ui.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,9 +19,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         mainViewModel.getTeamList(this)
-       // Log.e("teamListA",mainViewModel.teamList.toString())
+       mainViewModel.tempList.forEach {
+           Log.d("tempListA",it.name)
+       }
 
 
 
     }
+
+
 }
