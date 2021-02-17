@@ -1,23 +1,35 @@
 package com.app.soccerleaugefixtureapp.ui.adapter
 
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.app.soccerleaugefixtureapp.R
+import com.app.soccerleaugefixtureapp.data.model.Team
+import kotlinx.android.synthetic.main.team_list_item.view.*
 
-class TeamsAdapter():RecyclerView.Adapter<TeamsAdapter.TeamViewHolder>() {
+class TeamsAdapter(val teamList:ArrayList<Team>):RecyclerView.Adapter<TeamsAdapter.TeamViewHolder>() {
     class TeamViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeamViewHolder {
-        TODO("Not yet implemented")
+        val inflater = LayoutInflater.from(parent.context)
+        val view = inflater.inflate(R.layout.team_list_item, parent, false)
+        return TeamViewHolder(view)
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return teamList.size
     }
 
     override fun onBindViewHolder(holder: TeamViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        holder.view.team_name_txt.text=teamList[position].name
+    }
+
+    fun UpdateTeamList(newTeamList:List<Team>){
+        teamList.clear()
+        teamList.addAll(newTeamList)
+        notifyDataSetChanged()
     }
 }
