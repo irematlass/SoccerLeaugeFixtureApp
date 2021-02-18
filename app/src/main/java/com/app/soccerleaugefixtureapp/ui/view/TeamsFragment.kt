@@ -9,9 +9,11 @@ import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.soccerleaugefixtureapp.R
+import com.app.soccerleaugefixtureapp.data.model.Team
 import com.app.soccerleaugefixtureapp.ui.adapter.TeamsAdapter
 import com.app.soccerleaugefixtureapp.ui.viewmodel.MainViewModel
 import com.app.soccerleaugefixtureapp.utils.Resource
+import com.app.soccerleaugefixtureapp.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_teams.*
 import javax.inject.Inject
@@ -21,7 +23,7 @@ class TeamsFragment : Fragment() {
 
     @Inject
     lateinit var mainViewModel: MainViewModel
-
+    lateinit var currentTeam:List<Team>
     private val teamsAdapter=TeamsAdapter(arrayListOf())
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +49,7 @@ class TeamsFragment : Fragment() {
         observeLiveData()
 
         draw_fixture_btn.setOnClickListener {
+             var result=Utils.drawFixture(currentTeam as ArrayList<Team>)
             val action=TeamsFragmentDirections.actionTeamsFragmentToFixturesFragment()
             Navigation.findNavController(view).navigate(action)
         }
@@ -55,6 +58,7 @@ class TeamsFragment : Fragment() {
         mainViewModel.teamList.observe(viewLifecycleOwner, Observer {response->
             when (response.status) {
                 Resource.Status.SUCCESS -> {
+                    currentTeam=response.data!!
                     teamsAdapter.UpdateTeamList(response.data!!)
                 }
             }
