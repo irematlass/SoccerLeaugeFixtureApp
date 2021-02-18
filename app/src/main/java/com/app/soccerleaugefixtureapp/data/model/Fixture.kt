@@ -5,8 +5,13 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 
+
+
 @Entity
 data class Fixture (
     @PrimaryKey
-    val Id: String
+    val Id: Int,
+    val homeTeam:String,
+    val awayTeam: String,
+    val matchDay: String
 )
