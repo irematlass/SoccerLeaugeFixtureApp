@@ -50,6 +50,7 @@ class TeamsFragment : Fragment() {
 
         draw_fixture_btn.setOnClickListener {
              var result=Utils.drawFixture(currentTeam as ArrayList<Team>)
+             var db=mainViewModel.insertFixture(result)
             val action=TeamsFragmentDirections.actionTeamsFragmentToFixturesFragment()
             Navigation.findNavController(view).navigate(action)
         }

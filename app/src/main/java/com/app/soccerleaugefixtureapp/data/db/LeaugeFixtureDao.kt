@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import com.app.soccerleaugefixtureapp.data.model.Fixture
+import com.bumptech.glide.load.engine.Resource
 
 @Dao
 interface LeaugeFixtureDao {
@@ -13,4 +14,7 @@ interface LeaugeFixtureDao {
 
     @Query("SELECT * FROM fixture")
     suspend fun getAllFixture(): List<Fixture>
+
+    @Query("DELETE FROM fixture")
+    suspend fun deleteAllFixture()
 }

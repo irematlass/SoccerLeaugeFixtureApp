@@ -10,8 +10,8 @@ import androidx.room.PrimaryKey
 @Entity
 data class Fixture (
     @PrimaryKey
-    val Id: Int,
+    val Id: String,
     val homeTeam:String,
     val awayTeam: String,
-    val matchDay: String
+    val matchWeek: Int
 )

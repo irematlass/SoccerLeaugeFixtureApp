@@ -12,5 +12,6 @@ class FixtureRepository @Inject constructor(
     suspend fun getTeamsList()=SoccerTeamsApi.getTeamsList()
     suspend fun addFixtures(fixtures: List<Fixture>)=FixtureDao.insertAll(fixtures)
     suspend fun getFixtures()=FixtureDao.getAllFixture()
+    suspend fun deleteAllFixtures()=FixtureDao.deleteAllFixture()
 
 }
