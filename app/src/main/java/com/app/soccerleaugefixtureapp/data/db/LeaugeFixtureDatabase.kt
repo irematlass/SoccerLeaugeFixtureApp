@@ -7,8 +7,8 @@ import androidx.room.RoomDatabase
 import com.app.soccerleaugefixtureapp.data.model.Fixture
 
 @Database(entities = arrayOf(Fixture::class), version = 1)
-abstract class LeaugeFixtureDatabase:RoomDatabase() {
-    abstract fun FixtureDao():LeaugeFixtureDao
+abstract class LeaugeFixtureDatabase : RoomDatabase() {
+    abstract fun FixtureDao(): LeaugeFixtureDao
 
     companion object {
         private const val DATABASE_NAME = "Fixture"

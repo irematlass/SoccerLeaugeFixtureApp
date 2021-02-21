@@ -23,8 +23,8 @@ class TeamsFragment : Fragment() {
 
     @Inject
     lateinit var mainViewModel: MainViewModel
-    lateinit var currentTeam:List<Team>
-    private val teamsAdapter=TeamsAdapter(arrayListOf())
+    lateinit var currentTeam: List<Team>
+    private val teamsAdapter = TeamsAdapter(arrayListOf())
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -43,24 +43,43 @@ class TeamsFragment : Fragment() {
 
         mainViewModel.getTeamList(requireContext())
 
-        teams_list.layoutManager=LinearLayoutManager(context)
-        teams_list.adapter=teamsAdapter
+        teams_list.layoutManager = LinearLayoutManager(context)
+        teams_list.adapter = teamsAdapter
 
         observeLiveData()
 
         draw_fixture_btn.setOnClickListener {
-             var result=Utils.drawFixture(currentTeam as ArrayList<Team>)
-             var db=mainViewModel.insertFixture(result)
-            val action=TeamsFragmentDirections.actionTeamsFragmentToFixturesFragment()
+            var result = Utils.drawFixture(currentTeam as ArrayList<Team>)
+            var db = mainViewModel.insertFixture(result)
+            val action = TeamsFragmentDirections.actionTeamsFragmentToFixturesViewPagerFragment()
             Navigation.findNavController(view).navigate(action)
         }
+        swipeRefreshLayout.setOnRefreshListener {
+            teams_list.visibility = View.GONE
+            teamListError.visibility = View.GONE
+            teamListLoading.visibility = View.VISIBLE
+            mainViewModel.getTeamList(requireContext())
+            swipeRefreshLayout.isRefreshing = false
+        }
     }
-    fun observeLiveData(){
-        mainViewModel.teamList.observe(viewLifecycleOwner, Observer {response->
+
+    fun observeLiveData() {
+        mainViewModel.teamList.observe(viewLifecycleOwner, Observer { response ->
             when (response.status) {
                 Resource.Status.SUCCESS -> {
-                    currentTeam=response.data!!
+                    teams_list.visibility = View.VISIBLE
+                    teamListLoading.visibility = View.GONE
+                    currentTeam = response.data!!
                     teamsAdapter.UpdateTeamList(response.data!!)
+                }
+                Resource.Status.ERROR -> {
+                    teamListError.visibility = View.VISIBLE
+                    teamListLoading.visibility = View.GONE
+                }
+                Resource.Status.LOADING -> {
+                    teamListLoading.visibility = View.VISIBLE
+                    teams_list.visibility = View.GONE
+                    teamListError.visibility = View.GONE
                 }
             }
 

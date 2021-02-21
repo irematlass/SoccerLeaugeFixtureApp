@@ -11,12 +11,16 @@
         android:label="fragment_teams"
         tools:layout="@layout/fragment_teams" >
         <action
-            android:id="@+id/action_teamsFragment_to_fixturesFragment"
-            app:destination="@id/fixturesFragment" />
+            android:id="@+id/action_teamsFragment_to_fixturesViewPagerFragment"
+            app:destination="@id/fixturesViewPagerFragment" />
     </fragment>
     <fragment
         android:id="@+id/fixturesFragment"
         android:name="com.app.soccerleaugefixtureapp.ui.view.FixturesFragment"
         android:label="fragment_fixtures"
         tools:layout="@layout/fragment_fixtures" />
+    <fragment
+        android:id="@+id/fixturesViewPagerFragment"
+        android:name="com.app.soccerleaugefixtureapp.ui.view.FixturesViewPagerFragment"
+        android:label="FixturesViewPagerFragment" />
 </navigation>

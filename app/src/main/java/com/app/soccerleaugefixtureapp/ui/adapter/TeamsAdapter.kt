@@ -8,7 +8,8 @@ import com.app.soccerleaugefixtureapp.R
 import com.app.soccerleaugefixtureapp.data.model.Team
 import kotlinx.android.synthetic.main.team_list_item.view.*
 
-class TeamsAdapter(val teamList:ArrayList<Team>):RecyclerView.Adapter<TeamsAdapter.TeamViewHolder>() {
+class TeamsAdapter(val teamList: ArrayList<Team>) :
+    RecyclerView.Adapter<TeamsAdapter.TeamViewHolder>() {
     class TeamViewHolder(var view: View) : RecyclerView.ViewHolder(view) {
 
     }
@@ -24,10 +25,10 @@ class TeamsAdapter(val teamList:ArrayList<Team>):RecyclerView.Adapter<TeamsAdapt
     }
 
     override fun onBindViewHolder(holder: TeamViewHolder, position: Int) {
-        holder.view.team_name_txt.text=teamList[position].name
+        holder.view.team_name_txt.text = teamList[position].name
     }
 
-    fun UpdateTeamList(newTeamList:List<Team>){
+    fun UpdateTeamList(newTeamList: List<Team>) {
         teamList.clear()
         teamList.addAll(newTeamList)
         notifyDataSetChanged()

@@ -35,11 +35,13 @@ class MyModule {
     @Provides
     fun provideFixtureRepository(
         fixtureDao: LeaugeFixtureDao,
-        soccerTeamsApi:SoccerTeamsAPI
-        ) = FixtureRepository(fixtureDao,soccerTeamsApi)
+        soccerTeamsApi: SoccerTeamsAPI
+    ) = FixtureRepository(fixtureDao, soccerTeamsApi)
 
+    @Singleton
     @Provides
-    fun provideMainViewModel(fixtureRepository: FixtureRepository)=MainViewModel(fixtureRepository)
+    fun provideMainViewModel(fixtureRepository: FixtureRepository) =
+        MainViewModel(fixtureRepository)
 }
 
 

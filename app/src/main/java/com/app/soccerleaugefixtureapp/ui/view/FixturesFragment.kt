@@ -14,11 +14,11 @@ import kotlinx.android.synthetic.main.fragment_fixtures.*
 
 import javax.inject.Inject
 
+
 @AndroidEntryPoint
 class FixturesFragment : Fragment() {
 
-    @Inject
-    lateinit var mainViewModel: MainViewModel
+    private  val ARG_OBJECT = "object"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -34,21 +34,13 @@ class FixturesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        arguments?.takeIf { it.containsKey(ARG_OBJECT) }?.apply {
+            val fixtures= getSerializable(ARG_OBJECT)
+        }
 
-        mainViewModel.getFixtureList(requireContext())
-        observeLiveData()
+
     }
-    fun observeLiveData(){
-        mainViewModel.getfixtureList.observe(viewLifecycleOwner, Observer {response->
-            when (response.status) {
-                Resource.Status.SUCCESS -> {
-                    fixList.text= response.data!!.toString()
-                }
-            }
 
 
-
-        })
-    }
 
 }
