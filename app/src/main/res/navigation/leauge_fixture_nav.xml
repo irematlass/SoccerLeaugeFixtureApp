@@ -22,5 +22,9 @@
     <fragment
         android:id="@+id/fixturesViewPagerFragment"
         android:name="com.app.soccerleaugefixtureapp.ui.view.FixturesViewPagerFragment"
-        android:label="FixturesViewPagerFragment" />
+        android:label="FixturesViewPagerFragment" >
+        <argument
+            android:name="teamCount"
+            app:argType="integer" />
+    </fragment>
 </navigation>

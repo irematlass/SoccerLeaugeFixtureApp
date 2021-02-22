@@ -19,14 +19,16 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class FixturesViewPagerFragment : Fragment() {
-    @Inject
-    lateinit var mainViewModel: MainViewModel
+
+    private var teamCount: Int = 0
     private lateinit var fixtureAdapter: FixtureAdapter
     private lateinit var viewPager: ViewPager2
-    private lateinit var groupList:Map<Int,List<Fixture>>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        arguments?.let {
+            teamCount=FixturesViewPagerFragmentArgs.fromBundle(it).teamCount
+        }
     }
 
     override fun onCreateView(
@@ -40,26 +42,18 @@ class FixturesViewPagerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mainViewModel.getFixtureList(requireContext())
-        observeLiveData()
+
+
         viewPager = view.findViewById(R.id.pager)
+        fixtureAdapter= FixtureAdapter(this, (teamCount-1)*2)
+        viewPager.adapter =fixtureAdapter
+
+
+
 
 
     }
-    fun observeLiveData() {
-        mainViewModel.getfixtureList.observe(viewLifecycleOwner, Observer { response ->
-            when (response.status) {
-                Resource.Status.SUCCESS -> {
-                    val fixtures= response.data!!
-                     groupList=fixtures.groupBy { it.matchWeek}
-                    fixtureAdapter= FixtureAdapter(this,groupList)
-
-                    viewPager.adapter =fixtureAdapter
-                }
-            }
 
 
-        })
-    }
 
 }

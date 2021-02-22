@@ -19,15 +19,17 @@ class MainViewModel @Inject constructor(private val fixtureRepository: FixtureRe
     var fixturesList: MutableLiveData<Resource<List<Long>>> = MutableLiveData()
     var getfixtureList: MutableLiveData<Resource<List<Fixture>>> = MutableLiveData()
     fun insertFixture(fixtureList: List<Fixture>) = viewModelScope.launch {
-        fixtureRepository.deleteAllFixtures()
+
         fixturesList.postValue(Resource.Loading())
         try {
+            fixtureRepository.deleteAllFixtures()
             val result = fixtureRepository.addFixtures(fixtureList)
             if (result.isNotEmpty())
                 fixturesList.postValue(Resource.Success(result))
             else
                 fixturesList.postValue(Resource.Error("An error occurred, please try again"))
-        } catch (t: Throwable) {
+        } catch (t: Throwable)
+        {
             fixturesList.postValue(Resource.Error("An error occurred, please try again: ${t.message}"))
         }
     }

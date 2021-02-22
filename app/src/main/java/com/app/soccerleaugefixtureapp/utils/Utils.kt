@@ -9,16 +9,16 @@ class Utils {
     companion object {
         fun drawFixture(myTeamList: ArrayList<Team>): List<Fixture> {
             val fixtureList = mutableListOf<Fixture>()
-            if (myTeamList.size % 2 != 0) myTeamList.add(Team(0, "Bye"))
+            if (myTeamList.size % 2 != 0) myTeamList.add(Team(0, "-"))
 
-            var countOfWeek = myTeamList.size * 2
+            var countOfWeek = (myTeamList.size-1) * 2
             var countOfDay = myTeamList.size / 2
             var tempTeams = mutableListOf<Team>()
             tempTeams.addAll(myTeamList.drop(countOfDay).take(countOfDay))
             tempTeams.addAll(myTeamList.drop(1).take(countOfDay - 1).toList().reversed())
             var tempSize = tempTeams.size
 
-            for (day in 1 until countOfWeek) {
+            for (day in 1.. countOfWeek) {
                 var teamIdx = day % tempSize
                 fixtureList.add(
                     Fixture(
