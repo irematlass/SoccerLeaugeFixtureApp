@@ -21,12 +21,7 @@
 
 
 ## API
-[JSON Server]
-JSON Server is available as a NPM package. The installation can be done by using the Node.js package manager:
-$ npm install -g json-server
+https://my-json-server.typicode.com/irematlass/SoccerLeaugeFixtureApp/teams
 
-JSON server by executing the following command:
-$ json-server --watch soccerteam.json
 
-my repo include Json file.
  
