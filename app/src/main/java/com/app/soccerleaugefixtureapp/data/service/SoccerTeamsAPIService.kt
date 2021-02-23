@@ -6,7 +6,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class SoccerTeamsAPIService {
     companion object {
-        private val BASE_URL = "http://10.0.2.2:3000/"
+        //private val BASE_URL = "http://10.0.2.2:3000/"
+        private val BASE_URL = "https://my-json-server.typicode.com/irematlass/SoccerLeaugeFixtureApp/"
 
         private val retrofit by lazy {
             Retrofit.Builder()
